@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teamintervaltest/app/data/model/data_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:teamintervaltest/app/modules/login/views/login_view.dart';
 
 class HomeController extends GetxController {
   // //TODO: Implement HomeController
@@ -52,5 +54,11 @@ class HomeController extends GetxController {
   changeText(value) {
     searchController.text = value;
     update();
+  }
+
+  void logOut() async {
+    final sharedprfns = await SharedPreferences.getInstance();
+    sharedprfns.clear();
+    Get.offAll(LoginView());
   }
 }

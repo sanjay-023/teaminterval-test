@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'package:teamintervaltest/app/modules/login/controllers/login_controller.dart';
 
 class LoginButton extends StatelessWidget {
-  LoginButton({Key? key}) : super(key: key);
+  LoginButton({Key? key, required this.userName, required this.password})
+      : super(key: key);
+  final String userName;
+  final String password;
 
   final loginController = Get.put(LoginController());
 
@@ -13,8 +16,7 @@ class LoginButton extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: ElevatedButton(
           onPressed: () {
-            loginController.login(loginController.usernameController.text,
-                loginController.passwordController.text);
+            loginController.login(userName, password);
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

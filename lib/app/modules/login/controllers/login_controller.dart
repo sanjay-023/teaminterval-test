@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teamintervaltest/app/modules/home/views/home_view.dart';
+import 'package:teamintervaltest/main.dart';
 
 class LoginController extends GetxController {
   // //TODO: Implement LoginController
@@ -20,13 +21,13 @@ class LoginController extends GetxController {
   // void onClose() {}
   // void increment() => count.value++;
 
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  bool isObscure = true;
 
-  void login(String userName, String password) {
-    if (usernameController.text.isNotEmpty ||
-        passwordController.text.isNotEmpty) {
-      if (usernameController.text == passwordController.text) {
+  void login(String userName, String password) async {
+    if (userName.isNotEmpty || password.isNotEmpty) {
+      if (userName == password) {
+        final sharedprfns = await SharedPreferences.getInstance();
+        await sharedprfns.setBool(SAVE_KEY, true);
         Get.offAll(HomeView());
       } else {
         Get.snackbar("Login Failed", "Incorrect username or password");
@@ -34,5 +35,10 @@ class LoginController extends GetxController {
     } else {
       Get.snackbar("Login Failed", "Enter Valid username and password");
     }
+  }
+
+  changeVisibility() {
+    isObscure = !isObscure;
+    update();
   }
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'app/routes/app_pages.dart';
 
+const SAVE_KEY = 'userloggedin';
 void main() {
   runApp(
     GetMaterialApp(

@@ -22,7 +22,12 @@ class HomeView extends GetView<HomeController> {
                 onPressed: () {
                   Get.to(SearchView());
                 },
-                icon: Icon(Icons.search))
+                icon: Icon(Icons.search)),
+            IconButton(
+                onPressed: () {
+                  homeController.logOut();
+                },
+                icon: Icon(Icons.exit_to_app))
           ],
           backgroundColor: Colors.transparent,
           elevation: 0,

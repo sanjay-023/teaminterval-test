@@ -5,6 +5,7 @@ import 'package:teamintervaltest/app/data/model/data_model.dart';
 import 'package:teamintervaltest/app/modules/common/colors.dart';
 
 import 'package:teamintervaltest/app/modules/home/views/widget/detail_view.dart';
+import 'package:teamintervaltest/app/modules/home/views/widget/search_view.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -16,6 +17,13 @@ class HomeView extends GetView<HomeController> {
         backgroundColor: CommonColors.bgColor,
         appBar: AppBar(
           title: Text("Home"),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Get.to(SearchView());
+                },
+                icon: Icon(Icons.search))
+          ],
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
@@ -26,7 +34,7 @@ class HomeView extends GetView<HomeController> {
             child: Column(
               children: [
                 FutureBuilder(
-                    future: homeController.getData(),
+                    future: homeController.getData("rum"),
                     builder: ((context, AsyncSnapshot<List<Drink>> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(

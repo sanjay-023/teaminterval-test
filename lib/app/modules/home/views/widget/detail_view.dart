@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:teamintervaltest/app/data/model/data_model.dart';
 import 'package:teamintervaltest/app/modules/common/colors.dart';
 import 'package:teamintervaltest/app/modules/home/views/widget/detail_box.dart';
+import 'package:teamintervaltest/app/modules/home/views/widget/image_view.dart';
 
 class DetailView extends StatelessWidget {
   final Drink data;
@@ -28,9 +29,16 @@ class DetailView extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 46,
-                  backgroundImage: NetworkImage(data.strDrinkThumb!),
+                InkWell(
+                  onTap: () {
+                    Get.to(Imageviewer(
+                      imageUrl: data.strDrinkThumb!,
+                    ));
+                  },
+                  child: CircleAvatar(
+                    radius: 46,
+                    backgroundImage: NetworkImage(data.strDrinkThumb!),
+                  ),
                 ),
                 SizedBox(
                   width: 14,

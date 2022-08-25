@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:teamintervaltest/app/data/model/data_model.dart';
 import 'package:http/http.dart' as http;
@@ -23,11 +24,13 @@ class HomeController extends GetxController {
   // void increment() => count.value++;
 
   List<Drink> dataList = [];
-  final String apiUrl =
-      "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=rum";
+  final searchController = TextEditingController();
 
-  Future<List<Drink>> getData() async {
-    final response = await http.get(Uri.parse(apiUrl));
+  final String apiUrl =
+      "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
+
+  Future<List<Drink>> getData(String endPoint) async {
+    final response = await http.get(Uri.parse(apiUrl + endPoint));
     try {
       if (response.statusCode == 200) {
         Map<String, dynamic> json = jsonDecode(response.body);
@@ -44,5 +47,10 @@ class HomeController extends GetxController {
       print(e.toString());
     }
     return dataList;
+  }
+
+  changeText(value) {
+    searchController.text = value;
+    update();
   }
 }

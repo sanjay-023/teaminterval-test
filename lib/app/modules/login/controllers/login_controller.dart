@@ -27,7 +27,7 @@ class LoginController extends GetxController {
     if (usernameController.text.isNotEmpty ||
         passwordController.text.isNotEmpty) {
       if (usernameController.text == passwordController.text) {
-        Get.to(HomeView());
+        Get.offAll(HomeView());
       } else {
         Get.snackbar("Login Failed", "Incorrect username or password");
       }
